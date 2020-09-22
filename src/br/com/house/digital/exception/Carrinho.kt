@@ -4,12 +4,14 @@ class Carrinho{
     val listaCombosSimples = mutableListOf<ComboSimples>()
     val listaCombosFamiliares = mutableListOf<ComboFamiliar>()
     val listaProdutos = mutableListOf<Produto>()
+    var precoTotalSemDesc: Double = 0.0
     var precoTotal: Double = 0.0
 
     fun adicionarProdutos(vararg produtos: Produto){
         listaProdutos.addAll(produtos)
         produtos.forEach {
             precoTotal += it.precoProduto
+            precoTotalSemDesc += it.precoProduto
         }
     }
 
@@ -17,6 +19,7 @@ class Carrinho{
         listaCombosSimples.addAll(combosS)
         combosS.forEach {
             precoTotal += it.precoProduto
+            precoTotalSemDesc += it.precoCombo
         }
     }
 
@@ -24,6 +27,7 @@ class Carrinho{
         listaCombosFamiliares.addAll(combosF)
         combosF.forEach {
             precoTotal += it.precoProduto
+            precoTotalSemDesc += it.precoCombo
         }
     }
 
@@ -46,6 +50,7 @@ class Carrinho{
         }
 
         println()
+        println("Preço total sem descontos: R$$precoTotalSemDesc")
         println("Preço total com descontos: R$$precoTotal")
     }
 }
